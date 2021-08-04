@@ -15,7 +15,7 @@ module.exports = {
 		const chalk = require('chalk');
 		const { fork } = require('child_process');
   
-		const services = require(path.join(__dirname, '../services.json'));
+		const services = require(path.join(__dirname, '../doting_websites.json.json'));
 		process.on('uncaughtException', errorAndDie);
 		process.on('unhandledRejection', errorAndDie);
 		global.liveOutput = !((args['--json'] || args['--pretty-json'] || args['--csv']));
@@ -100,7 +100,7 @@ module.exports = {
   
 			results[key] = 'Checking...';
   
-			const worker = fork(path.join(__dirname, '../https-worker.js'));
+			const worker = fork(path.join(__dirname, '../dot-worker.js'));
 			worker.on('message', r => {
 			  if (typeof r === 'boolean') {
 				results[key] = r ? url : 'Not Found!';
